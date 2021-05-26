@@ -1,15 +1,15 @@
-roocs-utils
-===========
+catalog-maker
+=============
 
-.. image:: https://img.shields.io/pypi/v/catalog_maker.svg
-   :target: https://pypi.python.org/pypi/catalog_maker
+.. image:: https://img.shields.io/pypi/v/catalog-maker.svg
+   :target: https://pypi.python.org/pypi/catalog-maker
    :alt: Pypi
 
-.. image:: https://github.com/roocs/catalog_maker/workflows/build/badge.svg
-    :target: https://github.com/roocs/catalog_maker/actions
+.. image:: https://github.com/roocs/catalog-maker/workflows/build/badge.svg
+    :target: https://github.com/roocs/catalog-maker/actions
     :alt: Build Status
 
-.. image:: https://readthedocs.org/projects/catalog_maker/badge/?version=latest
+.. image:: https://readthedocs.org/projects/catalog-maker/badge/?version=latest
    :target: https://catalog-maker.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation
 
@@ -20,13 +20,8 @@ A package to build intake catalogs for cmip5, cmip6 and cordex data holdings
 * Free software: BSD - see LICENSE file in top-level package directory
 * Documentation: https://catalog-maker.readthedocs.io.
 
-Features
---------
-
-# Intake Catalog
-
-1. Data Catalog
-^^^^^^^^^^^^^^^
+Creating an Intake Catalog
+==========================
 
 Catalog maker provides tools for writing data catalogs of the known data holdings in a csv format, described by a YAML file.
 
