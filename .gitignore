@@ -106,4 +106,4 @@ ENV/
 .vscode/
 
 #catalog maker outputs
-./catalog_data
+catalog_data/
