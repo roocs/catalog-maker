@@ -55,6 +55,12 @@ def _get_arg_parser_run(parser):
         help="Mode to run in, either 'lotus' (default) or 'local'.",
     )
 
+    parser.add_argument(
+        "-f",
+        "--force",
+        action="store_true",
+        help="Force rescan of datasets if they have previously been scanned successfully.",
+    )
     return parser
 
 
@@ -85,13 +91,15 @@ def parse_args_run(args):
     if datasets:
         datasets = datasets.split(",")
 
-    return args.project, batches, datasets, args.run_mode
+    return args.project, batches, datasets, args.run_mode, args.force
 
 
 def run_main(args):
-    project, batches, datasets, run_mode = parse_args_run(args)
+    project, batches, datasets, run_mode, force = parse_args_run(args)
 
-    tm = TaskManager(project, batches=batches, datasets=datasets, run_mode=run_mode)
+    tm = TaskManager(
+        project, batches=batches, datasets=datasets, run_mode=run_mode, force=force
+    )
     tm.run_tasks()
 
 

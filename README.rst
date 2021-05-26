@@ -1,24 +1,14 @@
 catalog-maker
 =============
 
-.. image:: https://img.shields.io/pypi/v/catalog-maker.svg
-   :target: https://pypi.python.org/pypi/catalog-maker
-   :alt: Pypi
-
 .. image:: https://github.com/roocs/catalog-maker/workflows/build/badge.svg
     :target: https://github.com/roocs/catalog-maker/actions
     :alt: Build Status
 
-.. image:: https://readthedocs.org/projects/catalog-maker/badge/?version=latest
-   :target: https://catalog-maker.readthedocs.io/en/latest/?badge=latest
-   :alt: Documentation
-
 
 A package to build intake catalogs for cmip5, cmip6 and cordex data holdings
 
-
 * Free software: BSD - see LICENSE file in top-level package directory
-* Documentation: https://catalog-maker.readthedocs.io.
 
 Creating an Intake Catalog
 ==========================

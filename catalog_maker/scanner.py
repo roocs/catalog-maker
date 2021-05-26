@@ -9,9 +9,10 @@ LOGGER = logging.getLogger(__file__)
 
 
 class Scanner(object):
-    def __init__(self, batch, project):
+    def __init__(self, batch, project, force=False):
         self._batch = batch
         self._project = project
+        self._force = force
 
         self._config = CONFIG[f"project:{project}"]
 
@@ -30,6 +31,11 @@ class Scanner(object):
         fpaths = get_files(dataset_id)
 
         for fpath in fpaths:
+
+            if self._force and self.rh.get_result_status(fpath):
+                # delete from db to run again
+                LOGGER.info(f"Clearing from database: {fpath}")
+                self.rh.delete_result(fpath)
 
             if self.rh.ran_successfully(fpath):
                 LOGGER.info(f"Already converted to catalog: {fpath}")

@@ -10,9 +10,10 @@ LOGGER = logging.getLogger(__file__)
 
 
 class ConversionTask(object):
-    def __init__(self, batch_number, project, run_mode="lotus"):
+    def __init__(self, batch_number, project, run_mode="lotus", force=False):
         self._batch_number = batch_number
         self._project = project
+        self._force = force
 
         if run_mode == "local":
             self.run = self._run_local
@@ -26,7 +27,7 @@ class ConversionTask(object):
         batch_manager = BatchManager(self._project)
         dataset_ids = batch_manager.get_batch(batch)
 
-        scanner = Scanner(batch, self._project)
+        scanner = Scanner(batch, self._project, force=self._force)
 
         for dataset_id in dataset_ids:
             scanner.scan(dataset_id)
@@ -67,12 +68,14 @@ class TaskManager(object):
         datasets=None,
         run_mode="lotus",
         ignore_complete=True,
+        force=False,
     ):
 
         self._project = project
         self._batches = batches
         self._datasets = datasets
         self._run_mode = run_mode
+        self._force = force
 
         self._ignore_complete = ignore_complete
         self._batch_manager = BatchManager(project)
@@ -147,5 +150,7 @@ class TaskManager(object):
             return
 
         for batch in self._batches:
-            task = ConversionTask(batch, project=self._project, run_mode=self._run_mode)
+            task = ConversionTask(
+                batch, project=self._project, run_mode=self._run_mode, force=self._force
+            )
             task.run()
