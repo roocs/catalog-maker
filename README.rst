@@ -27,12 +27,6 @@ For this, a postgresql database is required. Once you have a database, you need 
 
 The table created will be named after the project you are creating a catalog for in the format ``<project_name>_catalog_results`` e.g. c3s_cmip6_catalog_results
 
-Note when using the catalog maker, the dependencies ``abcunit-backend`` and ``psycopg2`` are required. These must be pip installed manually.
-
-.. code-block::
-
-    $ pip install abcunit-backend
-
 Creating batches
 ================
 
