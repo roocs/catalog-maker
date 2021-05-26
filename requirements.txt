@@ -1,0 +1,4 @@
+numpy>=1.16
+xarray>=0.15
+pandas
+roocs-utils
