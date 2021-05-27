@@ -57,6 +57,8 @@ or running all batches on lotus:
 
 This creates a table in the database containing an ordered dictionary of the entry for each file in each dataset if successful, or the error traceback if there is an Exception raised.
 
+Use the flag `-f` to force rescans for files that have previously been successfully scanned.
+
 Viewing entries and errors
 ==========================
 
