@@ -2,26 +2,34 @@
 
 """The setup script."""
 
-from setuptools import find_packages, setup
-
 __author__ = "Eleanor Smith"
 __contact__ = "eleanor.smith@stfc.ac.uk"
 __copyright__ = "Copyright 2020 United Kingdom Research and Innovation"
 __license__ = "BSD - see LICENSE file in top-level package directory"
+__version__ = "0.1.0"
 
-with open("README.rst") as readme_file:
-    readme = readme_file.read()
+import os
 
-with open("HISTORY.rst") as history_file:
-    history = history_file.read()
+from setuptools import find_packages, setup
+
+# One strategy for storing the overall version is to put it in the top-level
+# package's __init__ but Nb. __init__.py files are not needed to declare
+# packages in Python 3
+
+# Populate long description setting with content of README
+#
+# Use markdown format read me file as GitHub will render it automatically
+# on package page
+here = os.path.abspath(os.path.dirname(__file__))
+_long_description = open(os.path.join(here, "README.rst")).read()
 
 requirements = [line.strip() for line in open("requirements.txt")]
 
-dev_requirements = [line.strip() for line in open("requirements_dev.txt")]
-
-test_requirements = [
-    "pytest>=3",
+setup_requirements = [
+    "pytest-runner",
 ]
+
+test_requirements = ["pytest", "tox"]
 
 docs_requirements = [
     "sphinx",
@@ -31,14 +39,15 @@ docs_requirements = [
     "ipython",
     "ipykernel",
     "jupyter_client",
+    "matplotlib",
 ]
+
 
 setup(
     author=__author__,
     author_email=__contact__,
     python_requires=">=3.6",
-    # setup_requires = ['setuptools_scm'],
-    use_scm_version=True,
+    setup_requires=setup_requirements,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
@@ -73,7 +82,7 @@ setup(
     },
     install_requires=requirements,
     license=__license__,
-    long_description=readme,
+    long_description=_long_description,
     long_description_content_type="text/x-rst",
     include_package_data=True,
     keywords="catalog_maker",
@@ -81,7 +90,8 @@ setup(
     packages=find_packages(include=["catalog_maker", "catalog_maker.*"]),
     test_suite="tests",
     tests_require=test_requirements,
-    extras_require={"docs": docs_requirements, "dev": dev_requirements},
+    extras_require={"docs": docs_requirements},
     url="https://github.com/roocs/catalog-maker",
     zip_safe=False,
+    version=__version__,
 )
