@@ -5,6 +5,9 @@ catalog-maker
     :target: https://github.com/roocs/catalog-maker/actions
     :alt: Build Status
 
+.. image:: https://readthedocs.org/projects/catalog-maker/badge/?version=latest
+    :target: https://catalog-maker.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation
 
 A package to build intake catalogs for cmip5, cmip6 and cordex data holdings
 
