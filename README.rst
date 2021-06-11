@@ -22,7 +22,7 @@ For each project in ``catalog_maker/etc/roocs.ini`` there are options to set the
 A list of datasets to include needs to be provided. The path to this list for each project can be set in ``catalog_maker/etc/roocs.ini``.
 The datasets in this list must be what you want in the ``ds_id`` column of the csv file.
 
-** If creating a c3s-cmip6 inventory, make sure the dataset ids start with 'c3s-cmip6' instead of CMIP6 **
+**If creating a c3s-cmip6 inventory, make sure the dataset ids start with 'c3s-cmip6' instead of CMIP6**
 
 The data catalog is created using a database backend to store the results of the scans, from which the csv and YAML files will be created.
 For this, a postgresql database is required. Once you have a database, you need to export an environment variable called ``$ABCUNIT_DB_SETTINGS``:
