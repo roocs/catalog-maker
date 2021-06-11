@@ -1,4 +1,4 @@
-catalog-maker
+Catalog maker
 =============
 
 .. image:: https://github.com/roocs/catalog-maker/workflows/build/badge.svg
@@ -14,12 +14,15 @@ A package to build intake catalogs for cmip5, cmip6 and cordex data holdings
 * Free software: BSD - see LICENSE file in top-level package directory
 
 Creating an Intake Catalog
-==========================
+--------------------------
 
 Catalog maker provides tools for writing data catalogs of the known data holdings in a csv format, described by a YAML file.
 
 For each project in ``catalog_maker/etc/roocs.ini`` there are options to set the file paths for the inputs and outputs of this catalog maker.
-A list of datasets to include needs to be provided. The path to this list for each project can be set in ``catalog_maker/etc/roocs.ini``. The datasets in this list must be what you want in the ``ds_id`` column of the csv file.
+A list of datasets to include needs to be provided. The path to this list for each project can be set in ``catalog_maker/etc/roocs.ini``.
+The datasets in this list must be what you want in the ``ds_id`` column of the csv file.
+
+** If creating a c3s-cmip6 inventory, make sure the dataset ids start with 'c3s-cmip6' instead of CMIP6 **
 
 The data catalog is created using a database backend to store the results of the scans, from which the csv and YAML files will be created.
 For this, a postgresql database is required. Once you have a database, you need to export an environment variable called ``$ABCUNIT_DB_SETTINGS``:
@@ -31,7 +34,7 @@ For this, a postgresql database is required. Once you have a database, you need 
 The table created will be named after the project you are creating a catalog for in the format ``<project_name>_catalog_results`` e.g. c3s_cmip6_catalog_results
 
 Creating batches
-================
+----------------
 
 Once the list of datasets is collated a number of batches must be created:
 
@@ -42,7 +45,7 @@ Once the list of datasets is collated a number of batches must be created:
 The option ``-p`` is required to specify the project.
 
 Creating catalog entries
-========================
+------------------------
 
 Once the batches are created, the catalog maker can be run - either locally or on lotus. The settings for how many datasets to be included in a batch and the maximum duration of each job on lotus can also be changed in ``catalog_maker/etc/roocs.ini``.
 
@@ -60,8 +63,17 @@ or running all batches on lotus:
 
 This creates a table in the database containing an ordered dictionary of the entry for each file in each dataset if successful, or the error traceback if there is an Exception raised.
 
+It is also possible to force a rescan of datasets that have already been scanned. To do this use the `-f` flag.
+
+e.g.
+
+.. code-block::
+
+    $ python catalog_maker/cli.py run -p c3s-cmip6 -r lotus -f
+
+
 Viewing entries and errors
-==========================
+--------------------------
 
 To view the records:
 
@@ -100,7 +112,7 @@ The error count will show whether there are any datasets that have files which h
 You can then use the delete command explained below to delete the entries for these partially scanned datasets if required.
 
 Deleting entries
-================
+----------------
 It is possible to delete entries by dataset id:
 
 .. code-block::
@@ -117,7 +129,7 @@ To delete all entries, including errors for specific dataset ids, use the comman
     $ python catalog_maker/cli.py delete -p c3s-cmip6 -d <ds_id> -e
 
 Writing to CSV
-==============
+---------------
 
 The final command is to write the entries to a csv file.
 
@@ -148,7 +160,7 @@ It will have the name ``c3s.yml`` and will contain the below for each project sc
 ``urlpath`` and ``last_updated`` for a project will be updated very time the csv file is written for the project.
 
 Deleting the table of results
-=============================
+-----------------------------
 
 In order to delete all entries in the table of results:
 
@@ -157,7 +169,7 @@ In order to delete all entries in the table of results:
     $ python catalog_maker/cli.py clean -p c3s-cmip6
 
 Credits
-=======
+-------
 
 This package was created with ``Cookiecutter`` and the ``audreyr/cookiecutter-pypackage`` project template.
 
