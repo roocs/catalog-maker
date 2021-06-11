@@ -51,22 +51,22 @@ If you are proposing a feature:
 
 * Explain in detail how it would work.
 * Keep the scope as narrow as possible, to make it easier to implement.
-* Remember that this is a volunteer-driven project, and that contributions
-  are welcome :)
+
 
 Get Started!
 ------------
 
 Ready to contribute? Here's how to set up `catalog_maker` for local development.
 
-1. Fork the `catalog_maker` repo on GitHub.
+1. Fork the `catalog-maker` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_name_here/catalog_maker.git
+    $ git clone git@github.com:your_name_here/catalog-maker.git
 
-3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
+3. Install your local copy into a virtualenv. ::
 
-    $ mkvirtualenv catalog_maker
+    $ python venv venv
+    $ source venv/bin/activate
     $ cd catalog_maker/
     $ python setup.py develop
 
@@ -121,8 +121,11 @@ A reminder for the maintainers on how to deploy.
 Make sure all your changes are committed (including an entry in HISTORY.rst).
 Then run::
 
-$ git tag <tagname>
-$ git push origin <tagname>
+$ bumpversion patch (or major/minor)
+$ git push
+$ git push --tags
 
-Where the tag name is the raw version e.g. 0.1.0
-Travis will then deploy to PyPI if tests pass.
+Then to upload to pypi::
+
+$ python setup.py sdist bdist_wheel
+$ twine upload dist/*
