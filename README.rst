@@ -137,8 +137,14 @@ The final command is to write the entries to a csv file.
 
     $ python catalog_maker/cli.py write -p c3s-cmip6
 
-The csv file will be generated in the ``csv_dir`` specified in ``catalog_maker/etc/roocs.ini`` and will have the name "{project}_{version_stamp}.csv.gz".
-e.g. ``c3s-cmip6_v20210414.csv.gz``
+The flag -c will compress the output csv file. e.g.
+
+.. code-block::
+
+    $ python catalog_maker/cli.py write -p c3s-cmip6 -c
+
+The csv file will be generated in the ``csv_dir`` specified in ``catalog_maker/etc/roocs.ini`` and will have the name "{project}_{version_stamp}.csv.gz" if compressed
+e.g. ``c3s-cmip6_v20210414.csv.gz`` or "{project}_{version_stamp}.csv" if not compressed.
 
 A yaml file will be created the ``catalog_dir`` specified in ``catalog_maker/etc/roocs.ini``.
 It will have the name ``c3s.yml`` and will contain the below for each project scanned and which is using the same ``catalog_dir``:
