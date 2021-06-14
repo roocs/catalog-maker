@@ -207,21 +207,28 @@ def _get_arg_parser_write(parser):
         help="Project to write catalog for.",
     )
 
+    parser.add_argument(
+        "-c",
+        "--compress",
+        action="store_true",
+        help="Compress the output csv file.",
+    )
+
     return parser
 
 
 def parse_args_write(args):
-    return args.project
+    return args.project, args.compress
 
 
 def write_main(args):
-    project = parse_args_write(args)
+    project, compress = parse_args_write(args)
 
     rh = DataBaseHandler(table_name=f"{project.replace('-', '_')}_catalog_results")
 
     entries = rh.get_all_content()
 
-    path, last_updated = to_csv(entries, project)
+    path, last_updated = to_csv(entries, project, compress)
 
     cat_dir = CONFIG[f"project:{project}"]["catalog_dir"]
     cat_path = update_catalog(project, path, last_updated, cat_dir)

@@ -196,7 +196,7 @@ def update_catalog(project, path, last_updated, cat_dir):
     return cat_path
 
 
-def to_csv(content, project):
+def to_csv(content, project, compress):
     # create the dataframe
 
     df = pd.DataFrame(content)
@@ -214,7 +214,7 @@ def to_csv(content, project):
         project,
         last_updated,
         csv_dir,
-        compress=False,
+        compress=compress,
     )
     print(f"Catalog written {cat_path}")
     return cat_path, last_updated
