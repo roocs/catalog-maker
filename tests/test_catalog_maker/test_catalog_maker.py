@@ -129,7 +129,7 @@ class TestCatalogMaker:
                     ("start_time", "1850-01-16T12:00:00"),
                     ("end_time", "1949-12-16T12:00:00"),
                     ("bbox", "0.00, -89.25, 200.00, 60.75"),
-                    ("level", " "),
+                    ("level", ""),
                 ]
             )
             break
@@ -145,7 +145,7 @@ class TestCatalogMaker:
         # write yaml and csv
         entries = rh.get_all_content()
 
-        path, last_updated = to_csv(entries, self.project)
+        path, last_updated = to_csv(entries, self.project, compress=True)
         update_catalog(self.project, path, last_updated, self.catalog_dir)
 
         # check it writes csv and yaml files where it should
