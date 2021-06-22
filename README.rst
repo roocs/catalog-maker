@@ -13,6 +13,21 @@ A package to build intake catalogs for cmip5, cmip6 and cordex data holdings
 
 * Free software: BSD - see LICENSE file in top-level package directory
 
+Installing
+----------
+
+Create a clone of the repository: 
+
+``git clone https://github.com/roocs/catalog-maker.git``
+
+go into the catalog-maker directory
+
+``cd catalog-maker``
+
+Install the package into your virtual environment:
+
+``pip install -e .``
+
 Creating an Intake Catalog
 --------------------------
 
@@ -32,6 +47,8 @@ For this, a postgresql database is required. Once you have a database, you need 
     $ export ABCUNIT_DB_SETTINGS="dbname=<name> user=<user> host=<host> password=<pwd>"
 
 The table created will be named after the project you are creating a catalog for in the format ``<project_name>_catalog_results`` e.g. c3s_cmip6_catalog_results
+
+**For the below commands you must be in the catalog-maker directory**
 
 Creating batches
 ----------------
