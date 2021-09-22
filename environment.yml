@@ -10,3 +10,8 @@ dependencies:
   - xarray>=0.16
   - pandas
   - psycopg2
+  # tests
+  - pytest
+  - flake8
+  - watchdog
+  - sphinx
