@@ -16,7 +16,7 @@ A package to build intake catalogs for cmip5, cmip6 and cordex data holdings
 Installing
 ----------
 
-Create a clone of the repository: 
+Create a clone of the repository:
 
 ``git clone https://github.com/roocs/catalog-maker.git``
 
@@ -172,9 +172,11 @@ It will have the name ``c3s.yml`` and will contain the below for each project sc
       c3s-cmip6:
         args:
           urlpath:
-        cache:
-        - argkey: urlpath
-          type: file
+        csv_kwargs:
+          blocksize: null
+          compression: gzip
+          dtype:
+            level: object
         description: c3s-cmip6 datasets
         driver: intake.source.csv.CSVSource
         metadata:

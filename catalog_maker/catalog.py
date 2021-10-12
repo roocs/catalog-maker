@@ -162,7 +162,12 @@ def update_catalog(project, path, last_updated, cat_dir):
         f"{project}": {
             "description": f"{project} datasets",
             "driver": "intake.source.csv.CSVSource",
-            "cache": [{"argkey": "urlpath", "type": "file"}],
+            # "cache": [{"argkey": "urlpath", "type": "file"}],
+            "csv_kwargs": {
+                "blocksize": None,
+                "compression": "gzip",
+                "dtype": {"level": "object"},
+            },
             "args": {"urlpath": ""},
             "metadata": {"last_updated": ""},
         }

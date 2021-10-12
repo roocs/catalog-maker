@@ -1,0 +1,17 @@
+# conda env create -f environment.yml
+name: catalog_maker
+channels:
+  - conda-forge
+dependencies:
+  - pip
+  # open xarray results
+  - netcdf4
+  - numpy
+  - xarray>=0.16
+  - pandas
+  - psycopg2
+  # tests
+  - pytest
+  - flake8
+  - watchdog
+  - sphinx

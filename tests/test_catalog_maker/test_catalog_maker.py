@@ -2,6 +2,7 @@ import os
 import tempfile
 from datetime import MAXYEAR, MINYEAR, datetime
 from pathlib import Path
+import yaml
 
 import pandas as pd
 import pytest
@@ -60,6 +61,20 @@ class TestCatalogMaker:
             file.close()
 
             assert line_count == CONFIG["workflow"]["n_per_batch"]
+
+    def test_update_catalog(self):
+        last_updated = datetime.now().utcnow()
+        path = Path(f"{self.catalog_dir}/{self.project}/dummy/no_data.csv.gz")
+        update_catalog(self.project, path, last_updated, self.catalog_dir)
+
+        # check it writes yaml catalog where it should
+        cat_path = Path(f"{self.catalog_dir}/c3s.yaml")
+        assert cat_path.is_file()
+
+        # print(cat_path)
+        cat = yaml.load(open(cat_path))
+        assert cat['sources'][self.project]['csv_kwargs'] == \
+            {'blocksize': None, 'compression': 'gzip', 'dtype': {'level': 'object'}}
 
     @pytest.mark.skipif(
         os.environ.get("ABCUNIT_DB_SETTINGS") is None, reason="database backend not set"
@@ -149,8 +164,8 @@ class TestCatalogMaker:
         update_catalog(self.project, path, last_updated, self.catalog_dir)
 
         # check it writes csv and yaml files where it should
-        yaml = Path(f"{self.catalog_dir}/c3s.yaml")
-        assert yaml.is_file()
+        cat_path = Path(f"{self.catalog_dir}/c3s.yaml")
+        assert cat_path.is_file()
 
         last_updated = datetime.now().utcnow()
         version_stamp = last_updated.strftime("v%Y%m%d")
