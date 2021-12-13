@@ -2,10 +2,11 @@ import os
 import tempfile
 from datetime import MAXYEAR, MINYEAR, datetime
 from pathlib import Path
-import yaml
 
 import pandas as pd
 import pytest
+import yaml
+from yaml import Loader
 
 from catalog_maker import CONFIG
 from catalog_maker.batch import BatchManager
@@ -72,9 +73,12 @@ class TestCatalogMaker:
         assert cat_path.is_file()
 
         # print(cat_path)
-        cat = yaml.load(open(cat_path))
-        assert cat['sources'][self.project]['csv_kwargs'] == \
-            {'blocksize': None, 'compression': 'gzip', 'dtype': {'level': 'object'}}
+        cat = yaml.load(open(cat_path), Loader=Loader)
+        assert cat["sources"][self.project]["csv_kwargs"] == {
+            "blocksize": None,
+            "compression": "gzip",
+            "dtype": {"level": "object"},
+        }
 
     @pytest.mark.skipif(
         os.environ.get("ABCUNIT_DB_SETTINGS") is None, reason="database backend not set"
