@@ -1,4 +1,5 @@
 import os
+import traceback
 
 from catalog_maker import CONFIG, logging
 from catalog_maker.batch import BatchManager
@@ -30,7 +31,11 @@ class ConversionTask(object):
         scanner = Scanner(batch, self._project, force=self._force)
 
         for dataset_id in dataset_ids:
-            scanner.scan(dataset_id)
+            try:
+                scanner.scan(dataset_id)
+            except Exception:
+                LOGGER.error(f"{traceback.format_exc()}")
+                continue
 
     def _run_lotus(self):
         LOGGER.info(f"Submitting to Lotus: {self._batch_number}")

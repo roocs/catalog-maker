@@ -79,7 +79,7 @@ def get_level_info(ds):
             for l in levels:
                 level += f" {l:.2f}"
         else:
-            level += f" {levels:.2f}"
+            level += f" {float(levels):.2f}"
 
     return level.lstrip(" ")
 

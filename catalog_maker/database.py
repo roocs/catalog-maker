@@ -49,7 +49,7 @@ class DataBaseHandler(BaseHandler):
     def _create_table(self):
         """
         Creates a table called <self.table_name> with primary key id
-        varchar(255), result varchar(255), content json, error text
+        text, result text, content json, error text
         if one does not already exist.
         """
 
@@ -57,7 +57,7 @@ class DataBaseHandler(BaseHandler):
             with conn.cursor() as cur:
                 cur.execute(
                     f"CREATE TABLE IF NOT EXISTS {self.table_name}"
-                    "(id varchar(255) PRIMARY KEY, result varchar(255) NOT NULL, content json, error text);"
+                    "(id text PRIMARY KEY, result text NOT NULL, content json, error text);"
                 )
                 conn.commit()
 
